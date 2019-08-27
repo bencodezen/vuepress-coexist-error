@@ -1,29 +1,30 @@
-# app
+# VuePress Coexist Error
 
-## Project setup
-```
-yarn install
-```
+This repo is created to demonstrate an issue discovered in an attempt to integrate a Vue CLI app with VuePress under the same `package.json` file.
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## Suspicion
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+My guess is that the way we're calling a dependency is conflicting with pre-existing libraries inside of `node_modules`.
 
-### Run your tests
-```
-yarn run test
-```
+## How to Reproduce Error
 
-### Lints and fixes files
+1. Install dependencies via `yarn`
+1. Run `yarn docs` to start VuePress instance
+1. Open http://localhost:8080
+1. See the following error in JavaScript Console
+
 ```
-yarn run lint
+[Vue warn]: Failed to resolve async component: function Layout() {
+    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./node_modules/@vuepress/theme-default/layouts/Layout.vue */ "./node_modules/@vuepress/theme-default/layouts/Layout.vue"));
+  }
+Reason: TypeError: Cannot assign to read only property 'exports' of object '#<Object>'
+warn @ webpack-internal:///./node_modules/vue/dist/vue.runtime.esm.js:620
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## How to See Success State
+
+1. Change directory to `/docs`
+1. Install dependencies via `yarn`
+1. Run `yarn docs` to start VuePress instance
+1. Open http://localhost:8080
+1. Everything looks great!
