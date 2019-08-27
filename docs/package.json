@@ -1,0 +1,11 @@
+{
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "docs": "vuepress dev src"
+  },
+  "devDependencies": {
+    "vuepress": "^1.0.3"
+  }
+}
